@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Computer Vision practical programs, notes, and PDF resources.">
+  <title>CV Study Hub | Computer Vision Programs</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #141c32;
+      --panel-2: #19233c;
+      --text: #f4f6ff;
+      --muted: #aab6d0;
+      --purple: #a78bfa;
+      --blue: #60a5fa;
+      --border: rgba(176, 190, 230, .17);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% -15%, rgba(124, 58, 237, .28), transparent 48%),
+        var(--bg);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1100px, calc(100% - 36px)); margin: 0 auto; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border);
+    }
+    .brand { font-weight: 850; letter-spacing: -.04em; font-size: 1.2rem; }
+    .brand span { color: var(--purple); }
+    nav { display: flex; gap: 22px; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+    nav a:hover { color: white; }
+    .hero { text-align: center; padding: 76px 0 48px; }
+    .eyebrow {
+      display: inline-block; color: #ddd6fe; background: rgba(139, 92, 246, .14);
+      border: 1px solid rgba(167, 139, 250, .3); padding: 8px 13px;
+      border-radius: 999px; font-size: .82rem; font-weight: 700;
+    }
+    h1 { font-size: clamp(2.35rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -.055em; margin: 20px 0 16px; }
+    h1 span { color: var(--purple); }
+    .hero p { color: var(--muted); max-width: 620px; margin: 0 auto; line-height: 1.75; font-size: 1.04rem; }
+    .search-row { margin: 28px auto 0; width: min(530px, 100%); position: relative; }
+    .search-row input {
+      width: 100%; border: 1px solid var(--border); background: rgba(20, 28, 50, .92);
+      color: var(--text); padding: 16px 18px 16px 46px; border-radius: 14px;
+      font: inherit; outline: none;
+    }
+    .search-row input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(167,139,250,.12); }
+    .search-icon { position: absolute; left: 16px; top: 14px; color: var(--muted); font-size: 1.15rem; }
+    main { padding: 16px 0 76px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin: 0 0 22px; }
+    .section-head h2 { margin: 0; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -.03em; }
+    .section-head p { color: var(--muted); margin: 7px 0 0; }
+    .count { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .card {
+      background: linear-gradient(145deg, rgba(25,35,60,.96), rgba(17,24,43,.98));
+      border: 1px solid var(--border); border-radius: 22px; padding: 26px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.13); transition: transform .22s ease, border-color .22s ease;
+      min-width: 0;
+    }
+    .card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,.62); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .file-icon {
+      width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px;
+      background: rgba(139,92,246,.17); font-size: 1.65rem;
+    }
+    .tag { color: #c4b5fd; background: rgba(139,92,246,.13); padding: 7px 10px; border-radius: 999px; font-size: .78rem; font-weight: 750; }
+    .card h3 { margin: 21px 0 9px; font-size: 1.35rem; }
+    .card p { color: var(--muted); line-height: 1.65; margin: 0 0 21px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none; border-radius: 11px; padding: 12px 15px; font-weight: 750;
+      font-size: .92rem; transition: background .2s, transform .2s;
+    }
+    .btn:focus-visible, nav a:focus-visible { outline: 3px solid #c4b5fd; outline-offset: 3px; }
+    .btn-primary { background: linear-gradient(110deg, #8b5cf6, #6366f1); color: white; }
+    .btn-primary:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .btn-secondary { border: 1px solid var(--border); color: #e3e9fa; background: rgba(255,255,255,.025); }
+    .btn-secondary:hover { background: rgba(255,255,255,.08); }
+    .empty { display: none; padding: 28px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 16px; }
+    .tip {
+      margin-top: 26px; padding: 18px 20px; border-radius: 16px;
+      border: 1px solid var(--border); background: rgba(20,28,50,.6);
+      color: var(--muted); line-height: 1.65;
+    }
+    .tip strong { color: var(--text); }
+    footer { border-top: 1px solid var(--border); padding: 25px 0 32px; color: var(--muted); text-align: center; font-size: .9rem; }
+    [hidden] { display: none !important; }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 28px, 520px); }
+      header { align-items: flex-start; }
+      nav { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+      nav a { font-size: .85rem; }
+      .hero { padding: 58px 0 38px; }
+      .grid { grid-template-columns: 1fr; }
+      .card { padding: 22px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="#home" aria-label="CV Study Hub home" style="text-decoration:none">CV <span>STUDY HUB</span> ✦</a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#resources">Programs</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <section class="hero wrap" id="home">
+    <div class="eyebrow">YOUR COMPUTER VISION RESOURCE SPACE</div>
+    <h1>Learn. Practice. <span>Build.</span></h1>
+    <p>Computer Vision practical programs in one simple place. View the PDF in your browser or download it for offline study.</p>
+    <div class="search-row">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input id="search" type="search" placeholder="Search programs or PDF files..." aria-label="Search PDF resources">
+    </div>
+  </section>
+
+  <main class="wrap" id="resources">
+    <div class="section-head">
+      <div>
+        <h2>📚 Practical Programs</h2>
+        <p>Choose a collection to view or save.</p>
+      </div>
+      <span class="count" id="count">2 resources</span>
+    </div>
+
+    <div class="grid" id="resourceGrid">
+      <article class="card" data-search="computer vision cv opencv programs practice 1 2 3 4 5 6 7 transformations projection quantization edge detection sift surf segmentation object detection">
+        <div class="card-top">
+          <div class="file-icon" aria-hidden="true">📘</div>
+          <span class="tag">PRACTICE 01–07</span>
+        </div>
+        <h3>CV Programs 01–07</h3>
+        <p>Image transformations, projection, quantization, edge and feature detection, SIFT/SURF, segmentation, and object detection.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="files/cv-programs-01-07.pdf" target="_blank" rel="noopener">↗ View PDF</a>
+          <a class="btn btn-secondary" href="files/cv-programs-01-07.pdf" download>↓ Download</a>
+        </div>
+      </article>
+
+      <article class="card" data-search="computer vision cv opencv programs practice 8 9 10 11 12 13 14 15 recognition matching classification tracking ocr scanner motion analysis">
+        <div class="card-top">
+          <div class="file-icon" aria-hidden="true">📗</div>
+          <span class="tag">PRACTICE 08–15</span>
+        </div>
+        <h3>CV Programs 08–15</h3>
+        <p>Object recognition, image matching, classification, object tracking, OCR, document scanning, and motion analysis.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="files/cv-programs-08-15.pdf" target="_blank" rel="noopener">↗ View PDF</a>
+          <a class="btn btn-secondary" href="files/cv-programs-08-15.pdf" download>↓ Download</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="empty" id="empty">No matching resources found. Try searching “tracking”, “OCR”, or “programs”.</div>
+
+    <div class="tip" id="about">
+      <strong>💡 Study tip:</strong> Open a PDF to read it online, or choose Download to keep a copy on your device. If a PDF does not open, check that the PDF file is inside the website's <code>files</code> folder.
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">CV Study Hub · Computer Vision Practical Resources</div>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const empty = document.getElementById('empty');
+    const count = document.getElementById('count');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const text = (card.innerText + ' ' + card.dataset.search).toLowerCase();
+        const matches = text.includes(query);
+        card.hidden = !matches;
+        if (matches) visible++;
+      });
+      empty.style.display = visible === 0 ? 'block' : 'none';
+      count.textContent = `${visible} resource${visible === 1 ? '' : 's'}`;
+    });
+  </script>
+</body>
+</html>
